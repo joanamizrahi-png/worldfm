@@ -5,7 +5,7 @@
   <a href='https://github.com/inspatio/worldfm/blob/main/LICENSE'><img src='https://img.shields.io/badge/License-Apache%202.0-blue'></a>
 </div>
 
-WorldFM, a real-time multi-view diffusion model. Given a reference image and target camera poses, WorldFM generates images at those new viewpoints. Chechout our websites ([WorldFM](https://inspatio.github.io/worldfm)) for videos and interactive results!
+WorldFM, a real-time multi-view diffusion model. Given a reference image and target camera poses, WorldFM generates images at those new viewpoints. Checkout our websites ([WorldFM](https://inspatio.github.io/worldfm)) for videos and interactive results!
 
 
 ## Installation
@@ -42,7 +42,7 @@ pip install -e .
 ```
 
 For consistent scene generation, we employ an internal generative model that is not included in the open-source release.
-To support reproducibility, users can integrate alternative open-source panorama generation models (e.g., HunyuanWorld-1.8). This substitution does not impact the core spatial reasoning framework of WorldFM.
+To support reproducibility, users can integrate alternative open-source panorama generation models (e.g., HunyuanWorld-1.0). This substitution does not impact the core spatial reasoning framework of WorldFM.
 
 ## Getting Started
 ### Download Pretrained Model
