@@ -1,12 +1,8 @@
 # WorldFM
 
-<div align="left">
-  <a href='https://inspatio.github.io/worldfm'><img src='https://img.shields.io/badge/Project_Page-Website-green?logo=googlechrome&logoColor=white' alt='Project Page'></a>
-  <a href='https://github.com/inspatio/worldfm/blob/main/LICENSE'><img src='https://img.shields.io/badge/License-Apache%202.0-blue'></a>
-</div>
+
 
 WorldFM, a real-time multi-view diffusion model. Given a reference image and target camera poses, WorldFM generates images at those new viewpoints. Checkout our website ([WorldFM](https://inspatio.github.io/worldfm)) for videos and interactive results!
-
 
 ## Installation
 
@@ -18,6 +14,7 @@ bash setup.sh
 ```
 
 This will:
+
 - Create the `WorldFM` conda environment (Python 3.10, PyTorch 2.5, CUDA 12.4)
 - Install pip dependencies from `requirements.txt`
 - Initialize git submodules (HunyuanWorld-1.0, MoGe, Real-ESRGAN, ZIM)
@@ -45,6 +42,7 @@ For consistent scene generation, we employ an internal generative model that is 
 To support reproducibility, users can integrate alternative open-source panorama generation models (e.g., HunyuanWorld-1.0). This substitution does not impact the core spatial reasoning framework of WorldFM.
 
 ## Getting Started
+
 ### Download Pretrained Model
 
 Download model checkpoints from [huggingface](https://huggingface.co/inspatio/worldfm) by running:
@@ -52,6 +50,17 @@ Download model checkpoints from [huggingface](https://huggingface.co/inspatio/wo
 ```sh
 python download_ckpts.py
 ```
+
+You will get:
+
+```
+weights/
+  ├── vae/
+  ├── worldfm_1-step.pth  # DMD step=1, faster
+  └── worldfm_2-step.pth  # DMD step=2, better quality
+```
+
+Use `--step 1` or `--step 2` in `run_pipeline.py` to select the corresponding model.
 
 ## Usage
 
@@ -121,7 +130,7 @@ Default parameters are defined in `default.yaml`. Override them via:
 
 1. **CLI arguments** (highest priority)
 2. **Custom config file**: `--config my_config.yaml`
-3. **`default.yaml`** (lowest priority)
+3. `**default.yaml`** (lowest priority)
 
 ### Output
 
@@ -143,16 +152,18 @@ With `--save_mode image`:
   └── ...
 ```
 
-
 # License
+
 The license of our codebase is [Apache-2.0](https://github.com/inspatio/worldfm/blob/main/LICENSE). Note that this license only applies to code in our library, the dependencies and submodules of which ([HunyuanWorld-1.0](https://github.com/Tencent-Hunyuan/HunyuanWorld-1.0/blob/main/LICENSE), [MoGe](https://github.com/microsoft/MoGe/blob/main/LICENSE)) are separate and individually licensed.
 
-
 # Contributing
+
 We appreciate all contributions to improve WorldFM.
 
 # Citing
+
 If you use WorldFM in your research, please use the following BibTeX entry.
+
 ```bib
 @misc{worldfm,
     title={Inspatio-WorldFM: An Open-Source Real-Time Generative Frame Model for Spatial Intelligence},
@@ -163,4 +174,5 @@ If you use WorldFM in your research, please use the following BibTeX entry.
 ```
 
 # Acknowledgement
+
 This codebase is built upon [PixArt-Sigma](https://github.com/PixArt-alpha/PixArt-sigma). We would like to express our gratitude to the PixArt Team for open-sourcing their code and models. Their contributions have been instrumental to the development of this project. We also appreciate [PRoPe](https://github.com/liruilong940607/prope), [HunyuanWorld-1.0](https://github.com/Tencent-Hunyuan/HunyuanWorld-1.0.git) and [MoGe](https://github.com/microsoft/MoGe.git) for their excellent work.
