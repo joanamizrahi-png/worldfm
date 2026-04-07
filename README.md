@@ -10,7 +10,7 @@
 <div align="left">
 <div align="left">
 
-[![LICENSE](https://img.shields.io/github/license/inspatio/worldfm)](https://github.com/inspatio/worldfm/blob/main/LICENSE)  [![arXiv](https://img.shields.io/badge/arXiv-2603.11911-b31b1b.svg)](https://arxiv.org/abs/2603.11911)
+[![LICENSE](https://img.shields.io/github/license/inspatio/worldfm)](https://github.com/inspatio/worldfm/blob/main/LICENSE)  [![arXiv](https://img.shields.io/badge/arXiv-2603.11911-b31b1b.svg)](https://arxiv.org/abs/2603.11911)  [![Discord](https://img.shields.io/badge/Discord-Join-7289da?logo=discord&logoColor=white)](https://discord.gg/SyyjR3Z57w)
 
 
 WorldFM, a real-time multi-view diffusion model. Given a reference image and target camera poses, WorldFM generates images at those new viewpoints. Checkout our website ([WorldFM](https://inspatio.github.io/worldfm)) for videos and interactive results!
