@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-CONDA_ENV_PATH=''
+CONDA_ENV_PATH="$HOME"
 conda env create -f WorldFM.yaml --prefix $CONDA_ENV_PATH/WorldFM
 conda activate $CONDA_ENV_PATH/WorldFM
 pip install -r requirements.txt
