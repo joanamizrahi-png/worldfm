@@ -9,7 +9,11 @@ import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import xformers.ops
+try:
+    import xformers.ops
+    HAS_XFORMERS = True
+except ImportError:
+    HAS_XFORMERS = False
 import os
 from einops import rearrange
 from timm.models.vision_transformer import Mlp, Attention as Attention_
@@ -74,8 +78,16 @@ class MultiHeadCrossAttention(nn.Module):
                 mask_list = mask
             else:
                 mask_list = None
-            attn_bias = xformers.ops.fmha.BlockDiagonalMask.from_seqlens([N_int] * B_int, mask_list)
-        x = xformers.ops.memory_efficient_attention(q, k, v, p=self.attn_drop.p, attn_bias=attn_bias)
+            if HAS_XFORMERS:
+                attn_bias = xformers.ops.fmha.BlockDiagonalMask.from_seqlens([N_int] * B_int, mask_list)
+            else:
+                attn_bias = None
+        if HAS_XFORMERS and q.is_cuda:
+            x = xformers.ops.memory_efficient_attention(q, k, v, p=self.attn_drop.p, attn_bias=attn_bias)
+        else:
+            q, k, v = q.transpose(1, 2), k.transpose(1, 2), v.transpose(1, 2)
+            x = F.scaled_dot_product_attention(q, k, v, attn_mask=attn_bias, dropout_p=self.attn_drop.p if self.training else 0.0)
+            x = x.transpose(1, 2)
         x = x.view(B, -1, C)
         x = self.proj(x)
         x = self.proj_drop(x)
