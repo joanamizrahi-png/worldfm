@@ -25,6 +25,17 @@ from pathlib import Path
 import cv2
 import numpy as np
 import torch
+
+# torch.from_numpy is broken when numpy 2.x C-API is incompatible with the
+# torch binary (NVIDIA container 25.08 issue). Patch it globally before any
+# downstream import (diffusers, basicsr, etc.) calls it.
+_orig_from_numpy = torch.from_numpy
+def _safe_from_numpy(arr):
+    try:
+        return _orig_from_numpy(arr)
+    except RuntimeError:
+        return torch.tensor(np.asarray(arr).copy())
+torch.from_numpy = _safe_from_numpy
 from omegaconf import OmegaConf
 from PIL import Image
 from tqdm import trange
